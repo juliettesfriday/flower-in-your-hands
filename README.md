@@ -4,9 +4,9 @@
 
 ## 演示视频
 
-[观看短版演示](docs/demo.mp4) · [下载高清原片](https://github.com/juliettesfriday/flower-in-your-hands/releases/tag/v1.0.0)
+<video src="https://github.com/user-attachments/assets/65145638-de83-4c82-a818-f4ad89eb3d23" width="420" height="558" controls></video>
 
-[![花随手动演示封面](docs/poster.jpg)](docs/demo.mp4)
+[下载高清原片](https://github.com/juliettesfriday/flower-in-your-hands/releases/tag/v1.0.0)
 
 ## 运行
 
