@@ -4,7 +4,11 @@
 
 ## 演示视频
 
-<video src="https://github.com/user-attachments/assets/65145638-de83-4c82-a818-f4ad89eb3d23" width="420" height="558" controls></video>
+<table><tr><td width="420">
+
+https://github.com/user-attachments/assets/65145638-de83-4c82-a818-f4ad89eb3d23
+
+</td></tr></table>
 
 [下载高清原片](https://github.com/juliettesfriday/flower-in-your-hands/releases/tag/v1.0.0)
 
