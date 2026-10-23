@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "width": 640,
+  "height": 640,
+  "background": "#08090b",
+  "flowers": [
+    {
+      "id": "fuyu",
+      "title": "馥郁之诗",
+      "frameCount": 96,
+      "pattern": "/media/fuyu/{frame}.webp",
+      "frameDigits": 3,
+      "poster": "/media/fuyu/poster.webp",
+      "sourceStart": 0,
+      "sourceEnd": 3.9583333333333335,
+      "capability": "petal-motion",
+      "note": "原片为盛开花朵的褶皱与旋转，手势控制该段运动；没有完整闭合花苞。原片底部有裁切，已柔化边缘。"
+    },
+    {
+      "id": "lily",
+      "title": "春",
+      "frameCount": 96,
+      "pattern": "/media/lily/{frame}.webp",
+      "frameDigits": 3,
+      "poster": "/media/lily/poster.webp",
+      "sourceStart": 0.35,
+      "sourceEnd": 4.35,
+      "capability": "bud-to-bloom",
+      "note": "原片包含花苞到盛开的完整动作，可反向回到花苞。"
+    },
+    {
+      "id": "flow",
+      "title": "富士山下",
+      "frameCount": 96,
+      "pattern": "/media/flow/{frame}.webp",
+      "frameDigits": 3,
+      "poster": "/media/flow/poster.webp",
+      "sourceStart": 2.15,
+      "sourceEnd": 8.2,
+      "capability": "unfolding",
+      "note": "提取原片中心花体并跟踪居中；原片有拖尾变形，使用柔边遮罩压低拖尾。小幅姿态变化仍保留。"
+    }
+  ]
+}
