@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#08090b" />
+    <meta name="description" content="张开手，让一朵花盛开。由你的手势驱动的数字花园。" />
+    <title>花随手动 · IN BLOOM</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="capture-frame" aria-label="花朵与摄像头录制画面">
+    <div class="installation">
+      <header class="header">
+        <a class="wordmark" href="/" aria-label="花随手动首页">
+          <span class="wordmark-cn">花随手动<span class="wordmark-dot">·</span></span>
+          <span class="wordmark-en">IN BLOOM</span>
+        </a>
+        <div class="header-actions">
+          <button id="camera-button" class="camera-button" type="button" aria-pressed="false">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="5.5" width="11" height="9" rx="2"/><path d="m13 8 5-2v8l-5-2"/></svg>
+            <span id="camera-label">开启摄像头</span>
+          </button>
+          <button id="fullscreen-button" class="icon-button fullscreen-button" type="button" aria-label="进入全屏" title="全屏">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4"/></svg>
+          </button>
+          <details class="settings">
+            <summary class="icon-button" aria-label="手势设置" title="手势设置">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 14h14"/><circle cx="7" cy="6" r="2"/><circle cx="13" cy="14" r="2"/></svg>
+            </summary>
+            <div class="settings-content">
+              <span class="eyebrow">GESTURE SETTINGS</span>
+              <label class="setting-row" for="swap-hands"><span>交换左右手</span><input id="swap-hands" type="checkbox" /><span class="switch" aria-hidden="true"></span></label>
+              <p>如果左右手识别与你的习惯相反，可以在这里交换。</p>
+              <div class="butterfly-help"><p>双手握紧，再迅速张开，让蝴蝶飞满画面。</p><button id="butterfly-button" class="text-button" type="button">预览蝴蝶 ↗</button></div>
+              <div class="keyboard-note"><kbd>←</kbd><kbd>→</kbd><span>也可以切换花朵</span></div>
+            </div>
+          </details>
+        </div>
+      </header>
+
+      <main class="stage" aria-label="手势互动花园">
+        <div class="stage-caption" aria-hidden="true"><span class="fine-line"></span><span>A LITTLE GARDEN, IN YOUR HANDS.</span></div>
+        <div class="flower-space">
+          <canvas id="flower-canvas" width="1280" height="1280" aria-label="当前花朵的动态画面"></canvas>
+          <div id="loading-screen" class="loading-screen" role="status" aria-live="polite">
+            <span class="loading-mark" aria-hidden="true">✳</span>
+            <span>一朵花，正在醒来</span>
+            <progress id="loading-progress" max="1" value="0" aria-label="花朵素材加载进度"></progress>
+          </div>
+        </div>
+
+        <div class="flower-description">
+          <span class="eyebrow flower-kicker">DIGITAL BOTANICAL · <span id="flower-subtitle">01 / 03</span></span>
+          <h1 id="flower-title">馥郁之诗</h1>
+          <p id="status-text" class="status-text" aria-live="polite">让花朵，跟随你的手。</p>
+        </div>
+
+        <aside class="gesture-guide" aria-label="手势操作说明">
+          <div class="gesture-instruction">
+            <svg class="hand-icon" viewBox="0 0 36 36" aria-hidden="true"><path d="M10 19V9a2 2 0 0 1 4 0v8V5a2 2 0 0 1 4 0v12V7a2 2 0 0 1 4 0v11V11a2 2 0 0 1 4 0v12c0 6-3 9-8 9-4 0-6-2-9-6l-5-7a2 2 0 0 1 3-3l3 3Z"/><path d="m29 8 3-2m-3 7 4 1M4 9 1 7"/></svg>
+            <div><span class="instruction-label">右手 · 控制绽放</span><span class="instruction-copy">张开，盛放。合拢，收起。</span></div>
+          </div>
+          <div class="gesture-instruction">
+            <svg class="hand-icon" viewBox="0 0 36 36" aria-hidden="true"><path d="M11 20v-9a2 2 0 0 1 4 0v7V7a2 2 0 0 1 4 0v11V9a2 2 0 0 1 4 0v10v-5a2 2 0 0 1 4 0v9c0 6-3 9-8 9-4 0-6-2-8-5l-4-5a2 2 0 0 1 3-3l1 1Z"/><path d="M3 4h27m-4-3 4 3-4 3M7 1 3 4l4 3"/></svg>
+            <div><span class="instruction-label">左手 · 切换花朵</span><span class="instruction-copy">向旁轻推，遇见下一朵。</span></div>
+          </div>
+        </aside>
+
+
+
+        <nav class="flower-navigation" aria-label="花朵选择">
+          <button id="previous-button" class="icon-button arrow-button" type="button" aria-label="上一朵花" title="上一朵">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 5-5 5 5 5"/></svg>
+          </button>
+          <div id="flower-list" class="flower-list">
+            <button type="button" class="flower-button is-active" data-flower="0" aria-pressed="true"><span class="thumbnail"><img src="/media/fuyu/poster.webp" data-thumb="0" alt="" /></span><span>馥郁之诗</span><span class="selection-dot" aria-hidden="true"></span></button>
+            <button type="button" class="flower-button" data-flower="1" aria-pressed="false"><span class="thumbnail"><img src="/media/lily/poster.webp" data-thumb="1" alt="" /></span><span>春</span><span class="selection-dot" aria-hidden="true"></span></button>
+            <button type="button" class="flower-button" data-flower="2" aria-pressed="false"><span class="thumbnail"><img src="/media/flow/poster.webp" data-thumb="2" alt="" /></span><span>富士山下</span><span class="selection-dot" aria-hidden="true"></span></button>
+          </div>
+          <button id="next-button" class="icon-button arrow-button" type="button" aria-label="下一朵花" title="下一朵">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 5 5 5-5 5"/></svg>
+          </button>
+        </nav>
+      </main>
+
+      <footer class="footer">
+        <p class="footer-caption">用一个手势，交换一场花开。</p>
+        <div class="bloom-control">
+          <label class="bloom-label" for="bloom-slider">绽放</label>
+          <input id="bloom-slider" type="range" min="0" max="1" step="0.001" value="1" aria-label="手动控制花朵绽放程度" />
+          <output id="bloom-value" for="bloom-slider">100%</output>
+          <span class="control-divider" aria-hidden="true"></span>
+          <button id="demo-button" class="text-button" type="button" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 6 5-6 5V3Z"/></svg><span>自动绽放</span></button>
+        </div>
+        <details class="media-details">
+          <summary>关于花朵 <span>↗</span></summary>
+          <div class="media-details-content"><span class="eyebrow">THE FLOWERS</span><p>花朵素材来自你提供的「致奇」数字花卉视频。</p><p id="media-note">在近黑的背景前，让每一次绽放由你掌握。</p></div>
+        </details>
+      </footer>
+      <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    </div>
+        <aside id="camera-panel" class="camera-panel" aria-label="摄像头预览与手势识别状态" hidden>
+          <div class="camera-feed">
+            <video id="camera-video" autoplay muted playsinline aria-label="仅在本机处理的摄像头预览"></video>
+            <canvas id="camera-overlay" width="240" height="180" aria-hidden="true"></canvas>
+            <span class="camera-live"><span></span> LIVE</span>
+          </div>
+          <div class="tracking-states">
+            <span id="right-status" class="tracking-status">右手 · 等待</span>
+            <span id="left-status" class="tracking-status">左手 · 等待</span>
+          </div>
+          <p id="butterfly-hint" class="butterfly-hint" aria-live="polite">双手握紧，再张开 · 唤起蝴蝶</p>
+          <p class="privacy-note"><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.5" y="5" width="7" height="5.5" rx="1"/><path d="M4 5V3a2 2 0 0 1 4 0v2"/></svg>画面仅在本机处理</p>
+        </aside>
+      <canvas id="butterfly-canvas" class="butterfly-layer" aria-hidden="true"></canvas>
+    </div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
